@@ -1,0 +1,40 @@
+<div class="container">
+  <h1>Mapa de Asientos</h1>
+  <p>Selecciona los asientos disponibles (azul = libre, rojo = ocupado).</p>
+
+  <div class="seat-map">
+    <!-- Clase de Negocios -->
+    <div class="seat-section">
+      <div class="seat-column">
+        <h3>Clase de negocios</h3>
+        <div class="row" *ngFor="let row of businessRows; let i = index">
+          <div *ngFor="let col of businessCols" 
+               [class.seat]="true"
+               [class.seat-available]="getSeatStatus('B', row, col) === 'available'"
+               [class.seat-occupied]="getSeatStatus('B', row, col) === 'occupied'"
+               [class.seat-selected]="getSeatStatus('B', row, col) === 'selected'"
+               (click)="toggleSeat('B', row, col)">
+            {{ row }}{{ col }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Clase Económica -->
+      <div class="seat-column">
+        <h3>Clase económica</h3>
+        <div class="row" *ngFor="let row of economyRows; let i = index">
+          <div *ngFor="let col of economyCols" 
+               [class.seat]="true"
+               [class.seat-available]="getSeatStatus('E', row, col) === 'available'"
+               [class.seat-occupied]="getSeatStatus('E', row, col) === 'occupied'"
+               [class.seat-selected]="getSeatStatus('E', row, col) === 'selected'"
+               (click)="toggleSeat('E', row, col)">
+            {{ row }}{{ col }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="confirm-button" (click)="confirmSelection()">Confirmar selección</button>
+</div>
